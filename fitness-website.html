@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitPulse - Transform Your Body</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        header {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffd700;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            background: #ffd700;
+            color: #333;
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .bmi-calculator {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .bmi-calculator h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ffd700;
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .calculate-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        
+        .result.show {
+            display: block;
+            animation: slideUp 0.5s;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0,0,0,0.3);
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">💪 FitPulse</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#calculator">BMI Calculator</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    
+    <section class="hero" id="home">
+        <h1>Transform Your Body, Transform Your Life</h1>
+        <p>Start your fitness journey today with personalized workouts and expert guidance</p>
+        <button class="cta-button">Get Started Free</button>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="feature-card">
+            <div class="feature-icon">🏋️</div>
+            <h3>Custom Workouts</h3>
+            <p>Get personalized workout plans tailored to your fitness level and goals. From beginner to advanced, we've got you covered.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🥗</div>
+            <h3>Nutrition Plans</h3>
+            <p>Balanced meal plans designed by nutritionists to fuel your body and help you reach your fitness goals faster.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Track Progress</h3>
+            <p>Monitor your journey with detailed analytics. See your improvements in strength, endurance, and body composition.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3>Community Support</h3>
+            <p>Join thousands of members on the same journey. Share tips, celebrate wins, and stay motivated together.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Goal Setting</h3>
+            <p>Set realistic goals and crush them. Our smart system helps you stay on track with daily challenges and reminders.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Expert Coaching</h3>
+            <p>Access certified trainers who provide guidance, answer questions, and keep you accountable every step of the way.</p>
+        </div>
+    </section>
+    
+    <section class="bmi-calculator" id="calculator">
+        <h2>BMI Calculator</h2>
+        <div class="input-group">
+            <label>Weight (kg)</label>
+            <input type="number" id="weight" placeholder="Enter your weight">
+        </div>
+        <div class="input-group">
+            <label>Height (cm)</label>
+            <input type="number" id="height" placeholder="Enter your height">
+        </div>
+        <button class="calculate-btn" onclick="calculateBMI()">Calculate BMI</button>
+        <div class="result" id="result">
+            <h3 id="bmi-value"></h3>
+            <p id="bmi-category"></p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 FitPulse. Transform your life, one rep at a time.</p>
+    </footer>
+    
+    <script>
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100;
+            
+            if (!weight || !height || weight <= 0 || height <= 0) {
+                alert('Please enter valid weight and height values!');
+                return;
+            }
+            
+            const bmi = (weight / (height * height)).toFixed(1);
+            let category = '';
+            let color = '';
+            
+            if (bmi < 18.5) {
+                category = 'Underweight';
+                color = '#64b5f6';
+            } else if (bmi >= 18.5 && bmi < 25) {
+                category = 'Normal weight';
+                color = '#4caf50';
+            } else if (bmi >= 25 && bmi < 30) {
+                category = 'Overweight';
+                color = '#ff9800';
+            } else {
+                category = 'Obese';
+                color = '#f44336';
+            }
+            
+            document.getElementById('bmi-value').textContent = `Your BMI: ${bmi}`;
+            document.getElementById('bmi-category').textContent = `Category: ${category}`;
+            document.getElementById('bmi-category').style.color = color;
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.add('show');
+        }
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
